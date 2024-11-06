@@ -1,0 +1,7 @@
+// Hint files help the Visual Studio IDE interpret Visual C++ identifiers
+// such as names of functions and macros.
+// For more information see https://go.microsoft.com/fwlink/?linkid=865984
+#define GATS_TEST_CASE_WEIGHTED(name, weight) static class TestCase_##name : public gats::TestApp::TestCase { public: TestCase_##name() : TestCase(#name,weight) { } public: virtual void execute() override; } TestCase_##name##_g; void TestCase_##name :: execute()
+#define GATS_CHECK_EQUAL(testValue, expectedValue) gats::TestApp::current_case(__FILE__,__LINE__)->check_equal((testValue), (expectedValue), #testValue, #expectedValue, __FILE__, __LINE__)
+#define GATS_CHECK(condition) gats::TestApp::current_case(__FILE__,__LINE__)->check((condition), #condition, __FILE__, __LINE__)
+#define GATS_TEST_CASE(name, __VA_ARGS__) static class TestCase_##name : public gats::TestApp::TestCase { public: TestCase_##name() : TestCase(#name, __VA_ARGS__) { } public: virtual void execute() override; } TestCase_##name##_g; void TestCase_##name :: execute()
